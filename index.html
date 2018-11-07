@@ -1,0 +1,129 @@
+
+<!doctype html>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Canvas Drawing App</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.brown-orange.min.css" /> 
+    <link rel="stylesheet" type="text/css" href="css/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="css/slick-theme.css"/>
+</head>
+<body>
+  <div id="main">
+    <div id="app">
+        <div id="drawingTools" class="toolbar">  
+            <!-- Colours -->
+            <div id="colors" class="colours">
+                <img src="images/eraser.png" data-mode="erase" data-size="20"/>
+                <img src="images/black.png" data-mode="color" data-color='#0f0f0f' class="active" />
+                <img src="images/red.png " data-mode="color"  data-color='#E66859'/>
+                <img src="images/blue.png" data-mode="color" data-color='#4a5165'/>
+                <img src="images/orange.png " data-mode="color"  data-color='#c7832c'/>
+                <img src="images/light_blue.png" data-mode="color" data-color='#597eb2'/>
+                <img src="images/yellow.png" data-mode="color" data-color='#Fbdc68'/>
+                <img src="images/purple.png" data-mode="color" data-color='#8b779b' />
+                <img src="images/green.png" data-mode="color" data-color='#9dc080'/>
+                <img src="images/tosca.png" data-mode="color" data-color='#539b7d'/>
+                <img src="images/white.png " data-mode="color"  data-color='white'/>
+                <img src="images/random.png" data-mode="random" />
+            </div>
+            <!-- Brush Size -->
+            <div id="brushSize">
+                <b>BRUSH SIZE</b>
+                <!-- Slider -->
+                <div class="slidecontainer">
+                    <input id="slide" class="slider" type="range" min="0" max="6" value="0" data-mode="draw" data-size="5">
+                </div>
+                <div class="labelBrush">
+                   <img id="thin" src="images/small.png" onclick="changeThin();" width="50px">
+                   <img id="bold" src="images/big.png" onclick="changeBold();"width="50px">
+                </div>
+            </div>
+        </div>    
+        <!-- Canvas -->
+        <canvas id="sketch" width="1024" height="640"></canvas>
+        <!-- Hovering info, undo, and clear -->
+        <div id="tools" class="toolbar-hover">
+            <img src="images/info.png" data-action="info"/>
+            <img src="images/undo.png" data-action="undo" class="disabled"/>
+            <img src="images/delete.png" data-action="delete"/>
+        </div>
+            
+        </div>
+      <!-- Background carousel -->
+        <div class="bg">
+          <div id="backgrounds" class="backgrounds" >
+            <div class="bg-boundary" data-mode="background" data-bg="bg1.jpeg"><img data-mode="background" data-bg="bg1.jpeg"class='bg-image' src="images/backgrounds/bg1.jpeg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg2.jpeg"><img data-mode="background" data-bg="bg2.jpeg"class='bg-image' src="images/backgrounds/bg2.jpeg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="paper.jpg"><img data-mode="background" data-bg="paper.jpg"class='bg-image' src="images/backgrounds/paper.jpg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg3.jpg"><img data-mode="background" data-bg="bg3.jpg"class='bg-image' src="images/backgrounds/bg3.jpg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg4.jpg"><img data-mode="background" data-bg="bg4.jpg"class='bg-image' src="images/backgrounds/bg4.jpg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg5.jpg"><img data-mode="background" data-bg="bg5.jpg"class='bg-image' src="images/backgrounds/bg5.jpg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg6.jpg"><img data-mode="background" data-bg="bg6.jpg"class='bg-image' src="images/backgrounds/bg6.jpg"></div>
+            <div class="bg-boundary" data-mode="background" data-bg="bg7.jpg"><img data-mode="background" data-bg="bg7.jpg"class='bg-image' src="images/backgrounds/bg7.jpg"></div>
+          </div>
+        </div>
+      <!-- Overlay for idle -->
+      <div id="overlay" class="overlay" onclick="off();">
+          <div class="content">
+            <img src="images/main.png"> <br>
+            <button class="btn btn-lg btn-success btn-block" onclick="off()">CONTINUE</button><br>
+            <button class="btn btn-lg btn-block" onclick="startOver()">RESTART</button><br>
+          </div>
+      </div>
+      <!-- Overlay to clear canvas -->
+      <div id="clearCanvas" class="overlay" onclick="offClear();">
+          <div class="content">
+            <img src="images/main.png"> <br>
+             <h4>Do you want to clear the canvas?</h4>
+            <button class="btn btn-lg btn-danger btn-block" onclick="clearCanvas();">YES</button><br>
+            <button class="btn btn-lg btn-block" onclick="offClear();">NO</button><br>
+          </div>
+      </div>
+      <!-- Overlay of the Information -->
+      <div id="information" class="overlay" onclick="offInfo();">
+          <div class="content-info">
+              <img src="images/main.png" width="500px">
+              <div class="content-grid">
+                 <img src="images/monet.jpg" width="200px"> 
+                 <p>
+                      Claude Monet is a French artist whose focus is on paintings. <br>
+                      He primarily uses oil and crayon for his work.
+                      His typical subjects include figures, landscapes and sceneries. <br>
+                      Monet is the leader of the French Impressionist Movement. 
+                      He uses colour and light to bring his paintings together. <br><br>
+                  </p>
+            </div>
+          <button class="btn btn-lg btn-block" onclick="offInfo();">CLOSE</button><br>
+          </div>
+      </div>
+    
+  </div>
+      
+</body>
+    
+    <script src="https://code.jquery.com/jquery-2.2.0.min.js" type="text/javascript"></script>
+    <script src="js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="js/slick.min.js"></script>
+    <script type="text/javascript" src="js/croquis.js"></script>
+    <script type="text/javascript">
+    /*Slick Carousel*/
+    /*Retrieved from : http://kenwheeler.github.io/slick/*/
+    
+    $('.backgrounds').slick({
+      infinite: true,
+      slidesToShow: 5,
+      slidesToScroll: 5
+    });
+  </script>
+    <script type="text/javascript" src="js/script.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+
+</html>

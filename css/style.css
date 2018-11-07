@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  user-select: none;
+}
+
+body {
+  background-color: #ffeace;
+  background-image: url(../images/wood.jpg);
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  width: 90vw;
+  height: 80vh;
+  display: grid;
+  grid-template-columns: 220px auto; 
+  box-shadow: 0px 1px 10px rgba( 0, 0, 0, 0.5 );
+}
+
+#main{
+  display: grid;
+  grid-template-rows: 80% 20%;
+}
+
+#drawingTools{
+    padding: 10px;
+}
+
+/*Brush*/
+.brush{
+    display: grid;
+    grid-template-rows: 45% 5% 45%; 
+}
+
+#brushSize{
+    text-align: center;
+}
+
+
+.overlay{
+    position: fixed; /* Sit on top of the page content */
+    display: none; /* Hidden by default */
+    width: 100%; /* Full width (cover the whole page) */
+    height: 100%; /* Full height (cover the whole page) */
+    top: 0; 
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.7); /* Black background with opacity */
+    z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+    cursor: pointer; /* Add a pointer on hover */
+    color:wheat;
+}
+#overlay{
+    display: block; /* Hidden by default */
+}
+
+.content-grid{
+    display: grid;
+    align-content: center;
+    grid-template-columns: 40% auto; 
+}
+
+.content-info p{
+    padding: 20px;
+}
+
+.content-info button{
+    grid-column-start: 1;
+    grid-column-end: 2;
+}
+
+.content-info{
+    text-align: justify;
+    margin-left:auto;
+    margin-right: auto;
+    width: 500px;
+    margin-top: 15vmin;
+}
+
+.content{
+    text-align: center;
+    margin-left:auto;
+    margin-right: auto;
+    width: 500px;
+    margin-top: 25vmin;
+}
+
+.content img{
+    width: 500px;
+}
+
+
+.toolbar {
+  background-image: url(../images/toolsbg.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.toolbar-hover{
+    position: absolute;
+    margin-left: 70vmax;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    float:right;
+}
+.toolbar-hover img{
+  width: 4rem;
+  height: 4rem;
+  margin: 0.9rem;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+}
+.toolbar-hover img.active {
+ border-color: #00ccff;
+}
+
+.toolbar-hover img:hover {
+ transform: scale(1.1);
+}
+
+.toolbar-hover img.disabled {
+ opacity: 0.5;
+ pointer-events: none;
+}
+
+.colours{
+  margin-left: 10%;    
+  align-items: center;
+}
+
+.colours img {
+  width: 4.5rem;
+  height: 4.5rem;
+  margin: 0.8vmin;
+  border: 3px solid #ffffff;
+  border-radius: 50%;
+  box-shadow:0 2px 6px rgba( 0,0,0,0.25 );
+}
+
+.colours img.active {
+ border-color: #b2ff72;
+}
+
+.colours img:hover {
+ transform: scale(1.1);
+}
+
+
+/* Slider */
+
+.labelBrush{
+    display: grid;
+    align-content: center;
+    grid-template-columns: 50% 50%; 
+}
+
+.labelBrush #bold{
+    grid-column: 2;
+    margin-left: 50%;
+}
+
+.bg {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 90vmax;
+    background-color: white;
+}
+.bg-boundary{
+    padding: 1rem;
+    text-align: center;
+}
+
+.bg-image{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    height: 8rem;
+}
+
+
+#sketch {
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  background-image: url( ../images/backgrounds/paper.jpg);
+  background-size: cover;
+  touch-action: none;
+  cursor: url(../images/cursor/size5.cur), crosshair;
+}
+
+#texture{
+    position: absolute;
+}
+
+/*Slider*/
+
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3px;
+    border-radius: 5px;   
+    background: #686868;
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+/* Mouse-over effects */
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */ 
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+     
+    background: chocolate;
+    cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    
+    background: chocolate;
+    cursor: pointer;
+}
+
+
+
+
